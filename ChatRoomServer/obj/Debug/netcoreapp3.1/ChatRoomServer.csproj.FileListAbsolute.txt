@@ -1,0 +1,4 @@
+C:\_MK\GameDPM\ChatRoomServer\ChatRoomServer\bin\Debug\netcoreapp3.1\ChatRoomServer.exe
+C:\_MK\GameDPM\ChatRoomServer\ChatRoomServer\obj\Debug\netcoreapp3.1\ChatRoomServer.csprojAssemblyReference.cache
+C:\_MK\GameDPM\ChatRoomServer\ChatRoomServer\obj\Debug\netcoreapp3.1\ChatRoomServer.AssemblyInfoInputs.cache
+C:\_MK\GameDPM\ChatRoomServer\ChatRoomServer\obj\Debug\netcoreapp3.1\ChatRoomServer.AssemblyInfo.cs
