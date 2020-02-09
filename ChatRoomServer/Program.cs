@@ -6,7 +6,15 @@ namespace ChatRoomServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Service service = new Service();
+            try
+            {  
+                service.StartService();
+            }
+            catch
+            {
+                service.CloseService();
+            }
         }
     }
 }
