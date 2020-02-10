@@ -11,14 +11,15 @@ namespace ChatRoomServer
     class Service
     {
         private int Port { get; } = 10086;
-        private byte[] Data { get; set; } = new byte[1024];
+        private byte[] Data { get; set; }
         private Socket ServeSocket { get; set; }
         private List<Socket> Clients { get; set; } = new List<Socket>();
         private Log Log { get; set; }
 
-        public Service()
+        public Service(int maxDataLength = 1024)
         {
             ServeSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Data = new byte[maxDataLength];
 
             Log = new Log();
             Log.Write("创建Service类。");
@@ -33,11 +34,11 @@ namespace ChatRoomServer
             {
                 ServeSocket.Bind(new IPEndPoint(ip, Port));
                 ServeSocket.Listen(10);
-                Log.Write("服务启动成功!");
+                Log.Write("服务启动成功！");
             }
             catch (Exception e)
             {
-                Log.Write("服务启动失败!", Log.LogType.Error);
+                Log.Write("服务启动失败！", Log.LogType.Error);
                 Log.Write(e.Message, Log.LogType.Error);
 
                 throw new Exception();
@@ -68,7 +69,7 @@ namespace ChatRoomServer
                     throw new Exception();
                 }
 
-                Log.Write($"{client.LocalEndPoint}连接成功!");
+                Log.Write($"{client.LocalEndPoint}连接成功！");
                 Clients.Add(client);
 
                 Thread thread = new Thread(Receive);
@@ -78,12 +79,16 @@ namespace ChatRoomServer
         
         private void Receive(object socket)
         {
-            Socket client = socket as Socket;
+            using Socket client = socket as Socket;
             int length;
             while (true)
             {
                 if (!client.Connected)
+                {
+                    Clients.Remove(client);
+                    Log.Write($"{client.LocalEndPoint}断开连接。");
                     break;
+                }
 
                 try
                 {
@@ -93,11 +98,13 @@ namespace ChatRoomServer
                 {
                     continue;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Log.Write(e.Message, Log.LogType.Error);
                     throw new Exception();
                 }
 
+                Log.Write($"从{client.LocalEndPoint}接收到信息。");
                 Send(length);
             }
         }
@@ -111,7 +118,10 @@ namespace ChatRoomServer
                 try
                 {
                     if (client.Connected)
+                    {
+                        Log.Write($"向{client.LocalEndPoint}发送信息。");
                         client.Send(data);
+                    }
                 }
                 catch
                 {

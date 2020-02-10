@@ -13,6 +13,7 @@ namespace ChatRoomServer
             Error
         }
 
+        private readonly object lockObject = new object();
         private string Path { get; set; }
         public Log(string fileName = "log.txt")
         {
@@ -21,8 +22,11 @@ namespace ChatRoomServer
 
         public void Write(string message, LogType type = LogType.Normal, char endChar = '\n')
         {
-            using StreamWriter writer = new StreamWriter(Path, true);
-            writer.Write(type + ":" + message + DateTime.Now.GetDateTimeString() + endChar);
+            lock (lockObject)
+            {
+                using StreamWriter writer = new StreamWriter(Path, true);
+                writer.Write(type + ":" + message + DateTime.Now.GetDateTimeString() + endChar);
+            }
         }
     }
 }
