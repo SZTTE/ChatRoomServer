@@ -22,23 +22,19 @@ namespace ChatRoomServer
             Data = new byte[maxDataLength];
 
             Log = new Log();
-            Log.Write("创建Service类。");
         }
 
         public void StartService()
         {
             IPAddress ip = IPAddress.Any;
 
-            Log.Write("尝试启动服务……");
             try
             {
                 ServeSocket.Bind(new IPEndPoint(ip, Port));
                 ServeSocket.Listen(10);
-                Log.Write("服务启动成功！");
             }
             catch (Exception e)
             {
-                Log.Write("服务启动失败！", Log.LogType.Error);
                 Log.Write(e.Message, Log.LogType.Error);
 
                 throw new Exception();
@@ -50,12 +46,10 @@ namespace ChatRoomServer
         public void CloseService()
         {
             ServeSocket.Close();
-            Log.Write("关闭服务。");
         }
 
         private void Listen()
         {
-            Log.Write("开始监听……");
             Socket client;
             while (true)
             {
@@ -69,7 +63,6 @@ namespace ChatRoomServer
                     throw new Exception();
                 }
 
-                Log.Write($"{client.LocalEndPoint}连接成功！");
                 Clients.Add(client);
 
                 Thread thread = new Thread(Receive);
@@ -86,7 +79,6 @@ namespace ChatRoomServer
                 if (!client.Connected)
                 {
                     Clients.Remove(client);
-                    Log.Write($"{client.LocalEndPoint}断开连接。");
                     break;
                 }
 
@@ -104,7 +96,6 @@ namespace ChatRoomServer
                     throw new Exception();
                 }
 
-                Log.Write($"从{client.LocalEndPoint}接收到信息。");
                 Send(length);
             }
         }
@@ -113,15 +104,12 @@ namespace ChatRoomServer
         {
             byte[] data = Data.Take(length).ToArray();
 
-            foreach (var client in Clients)
+            for (int i = 0; i < Clients.Count; i++)
             {
                 try
                 {
-                    if (client.Connected)
-                    {
-                        Log.Write($"向{client.LocalEndPoint}发送信息。");
-                        client.Send(data);
-                    }
+                    if (Clients[i].Connected)
+                        Clients[i].Send(data);
                 }
                 catch
                 {
