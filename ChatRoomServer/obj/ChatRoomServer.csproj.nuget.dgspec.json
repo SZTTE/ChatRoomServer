@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_MK\\GameDPM\\ChatRoomServer\\ChatRoomServer\\ChatRoomServer.csproj": {}
+    "D:\\data\\c#\\54 聊天室服务端\\ChatRoomServer\\ChatRoomServer.csproj": {}
   },
   "projects": {
-    "C:\\_MK\\GameDPM\\ChatRoomServer\\ChatRoomServer\\ChatRoomServer.csproj": {
+    "D:\\data\\c#\\54 聊天室服务端\\ChatRoomServer\\ChatRoomServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_MK\\GameDPM\\ChatRoomServer\\ChatRoomServer\\ChatRoomServer.csproj",
+        "projectUniqueName": "D:\\data\\c#\\54 聊天室服务端\\ChatRoomServer\\ChatRoomServer.csproj",
         "projectName": "ChatRoomServer",
-        "projectPath": "C:\\_MK\\GameDPM\\ChatRoomServer\\ChatRoomServer\\ChatRoomServer.csproj",
-        "packagesPath": "C:\\Users\\SZTTE\\.nuget\\packages\\",
-        "outputPath": "C:\\_MK\\GameDPM\\ChatRoomServer\\ChatRoomServer\\obj\\",
+        "projectPath": "D:\\data\\c#\\54 聊天室服务端\\ChatRoomServer\\ChatRoomServer.csproj",
+        "packagesPath": "C:\\Users\\火提昂\\.nuget\\packages\\",
+        "outputPath": "D:\\data\\c#\\54 聊天室服务端\\ChatRoomServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SZTTE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\火提昂\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
